@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Administration</title>
+
+    <link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" rel="stylesheet">
+    <script src="asserts/js/jquery-3.2.1.slim.min.js" th:href="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+</head>
+<style type="text/css">
+    .commands {
+        padding-top: 5px;
+    }
+    .briefInfo{
+        padding-top: 10px;
+    }
+</style>
+<body>
+<div class="container text-center">
+    <div class="row commands">
+        <div class="col-sm-12">
+            <a class="btn btn-primary" th:href="@{/rebuild}">更新所有记录项</a>
+            <a class="btn btn-info" th:href="@{/reindex}">重新生成单词索引</a>
+            <a class="btn btn-danger" th:href="@{/purge}">删除所有记录项</a>
+        </div>
+    </div>
+
+    <div class="row briefInfo" th:if="${not #strings.isEmpty(rebuildMsg) or not #strings.isEmpty(purgeMsg) or not #strings.isEmpty(reindexMsg)}">
+        <div class="alert alert-info col-sm-12" th:if="${not #strings.isEmpty(rebuildMsg)}" th:text="${rebuildMsg}">
+            <strong>Info!</strong> Indicates a neutral informative change or action.
+        </div>
+
+        <div class="alert alert-success col-sm-12" th:if="${not #strings.isEmpty(reindexMsg)}" th:text="${reindexMsg}">
+            <strong>Info!</strong> Indicates a neutral informative change or action.
+        </div>
+
+        <div class="alert alert-danger col-sm-12" th:if="${not #strings.isEmpty(purgeMsg)}" th:text="${purgeMsg}">
+            <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+        </div>
+    </div>
+</div>
+</body>
+</html>

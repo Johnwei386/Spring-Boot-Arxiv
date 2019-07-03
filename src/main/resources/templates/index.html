@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" rel="stylesheet">
+    <script th:href="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script th:href="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <script th:href="@{/webjars/popper.js/1.15.0/popper.min.js}"></script>
+</head>
+<body>
+<div class="container mt-3">
+    <form th:action="@{/search}" method="post">
+        <div class="input-group mb-3">
+            <input type="text" name="keywords" class="form-control" placeholder="Search">
+            <div class="input-group-append">
+                <button class="btn btn-success" type="submit">Go</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-borderless">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Authors</th>
+                <th>Time</th>
+                <th>Url</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="record:${records}">
+                <td th:text="${record.title}"></td>
+                <td th:text="${record.authors}"></td>
+                <td th:text="${#dates.format(record.time, 'yyyy-MM-dd')}"></td>
+                <td>
+                    <a th:href="${record.link}">[[${record.link}]]</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

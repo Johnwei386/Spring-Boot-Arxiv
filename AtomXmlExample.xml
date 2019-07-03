@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <link href="http://arxiv.org/api/query?search_query%3Dcat%3Acs.AI%26id_list%3D%26start%3D0%26max_results%3D10" rel="self" type="application/atom+xml"/>
+    <title type="html">ArXiv Query: search_query=cat:cs.AI&amp;id_list=&amp;start=0&amp;max_results=10</title>
+    <id>http://arxiv.org/api/xn611ryeCDnDvmVYOJ6SWZuh1qk</id>
+    <updated>2019-06-29T00:00:00-04:00</updated>
+    <opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">19501</opensearch:totalResults>
+    <opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">0</opensearch:startIndex>
+    <opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage>
+    <entry>
+        <id>http://arxiv.org/abs/1906.11790v1</id>
+        <updated>2019-06-27T16:52:29Z</updated>
+        <published>2019-06-27T16:52:29Z</published>
+        <title>Encoding Database Schemas with Relation-Aware Self-Attention for
+            Text-to-SQL Parsers</title>
+        <summary>  When translating natural language questions into SQL queries to answer
+            questions from a database, we would like our methods to generalize to domains
+            and database schemas outside of the training set. To handle complex questions
+            and database schemas with a neural encoder-decoder paradigm, it is critical to
+            properly encode the schema as part of the input with the question. In this
+            paper, we use relation-aware self-attention within the encoder so that it can
+            reason about how the tables and columns in the provided schema relate to each
+            other and use this information in interpreting the question. We achieve
+            significant gains on the recently-released Spider dataset with 42.94% exact
+            match accuracy, compared to the 18.96% reported in published work.
+        </summary>
+        <author>
+            <name>Richard Shin</name>
+        </author>
+        <link href="http://arxiv.org/abs/1906.11790v1" rel="alternate" type="text/html"/>
+        <link title="pdf" href="http://arxiv.org/pdf/1906.11790v1" rel="related" type="application/pdf"/>
+        <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    </entry>
+    <entry>
+        <id>http://arxiv.org/abs/1906.11732v1</id>
+        <updated>2019-06-27T15:29:52Z</updated>
+        <published>2019-06-27T15:29:52Z</published>
+        <title>Tuning-Free Disentanglement via Projection</title>
+        <summary>  In representation learning and non-linear dimension reduction, there is a
+            huge interest to learn the 'disentangled' latent variables, where each
+            sub-coordinate almost uniquely controls a facet of the observed data. While
+            many regularization approaches have been proposed on variational autoencoders,
+            heuristic tuning is required to balance between disentanglement and loss in
+            reconstruction accuracy -- due to the unsupervised nature, there is no
+            principled way to find an optimal weight for regularization. Motivated to
+            completely bypass regularization, we consider a projection strategy: modifying
+            the canonical Gaussian encoder, we add a layer of scaling and rotation to the
+            Gaussian mean, such that the marginal correlations among latent sub-coordinates
+            become exactly zero. This achieves a theoretically maximal disentanglement, as
+            guaranteed by zero cross-correlation between one latent sub-coordinate and the
+            observed varying with the rest. Unlike regularizations, the extra projection
+            layer does not impact the flexibility of the previous encoder layers, leading
+            to almost no loss in expressiveness. This approach is simple to implement in
+            practice. Our numerical experiments demonstrate very good performance, with no
+            tuning required.
+        </summary>
+        <author>
+            <name>Yue Bai</name>
+        </author>
+        <author>
+            <name>Leo L. Duan</name>
+        </author>
+        <link href="http://arxiv.org/abs/1906.11732v1" rel="alternate" type="text/html"/>
+        <link title="pdf" href="http://arxiv.org/pdf/1906.11732v1" rel="related" type="application/pdf"/>
+        <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    </entry>
+    <entry>
+        <id>http://arxiv.org/abs/1810.03679v2</id>
+        <updated>2019-06-27T15:10:27Z</updated>
+        <published>2018-10-08T19:58:46Z</published>
+        <title>Multi-agent Deep Reinforcement Learning for Zero Energy Communities</title>
+        <summary>  Advances in renewable energy generation and introduction of the government
+            targets to improve energy efficiency gave rise to a concept of a Zero Energy
+            Building (ZEB). A ZEB is a building whose net energy usage over a year is zero,
+            i.e., its energy use is not larger than its overall renewables generation. A
+            collection of ZEBs forms a Zero Energy Community (ZEC). This paper addresses
+            the problem of energy sharing in such a community. This is different from
+            previously addressed energy sharing between buildings as our focus is on the
+            improvement of community energy status, while traditionally research focused on
+            reducing losses due to transmission and storage, or achieving economic gains.
+            We model this problem in a multi-agent environment and propose a Deep
+            Reinforcement Learning (DRL) based solution. Each building is represented by an
+            intelligent agent that learns over time the appropriate behaviour to share
+            energy. We have evaluated the proposed solution in a multi-agent simulation
+            built using osBrain. Results indicate that with time agents learn to
+            collaborate and learn a policy comparable to the optimal policy, which in turn
+            improves the ZEC's energy status. Buildings with no renewables preferred to
+            request energy from their neighbours rather than from the supply grid.
+        </summary>
+        <author>
+            <name>Amit Prasad</name>
+        </author>
+        <author>
+            <name>Ivana Dusparic</name>
+        </author>
+        <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">Accepted at ISGT Europe 2019</arxiv:comment>
+        <link href="http://arxiv.org/abs/1810.03679v2" rel="alternate" type="text/html"/>
+        <link title="pdf" href="http://arxiv.org/pdf/1810.03679v2" rel="related" type="application/pdf"/>
+        <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="97R40" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="I.2.11; I.2.6" scheme="http://arxiv.org/schemas/atom"/>
+    </entry>
+    <entry>
+        <id>http://arxiv.org/abs/1803.07710v5</id>
+        <updated>2019-06-27T15:10:06Z</updated>
+        <published>2018-03-21T01:09:07Z</published>
+        <title>Inference in Probabilistic Graphical Models by Graph Neural Networks</title>
+        <summary>  A fundamental computation for statistical inference and accurate
+            decision-making is to compute the marginal probabilities or most probable
+            states of task-relevant variables. Probabilistic graphical models can
+            efficiently represent the structure of such complex data, but performing these
+            inferences is generally difficult. Message-passing algorithms, such as belief
+            propagation, are a natural way to disseminate evidence amongst correlated
+            variables while exploiting the graph structure, but these algorithms can
+            struggle when the conditional dependency graphs contain loops. Here we use
+            Graph Neural Networks (GNNs) to learn a message-passing algorithm that solves
+            these inference tasks. We first show that the architecture of GNNs is
+            well-matched to inference tasks. We then demonstrate the efficacy of this
+            inference approach by training GNNs on a collection of graphical models and
+            showing that they substantially outperform belief propagation on loopy graphs.
+            Our message-passing algorithms generalize out of the training set to larger
+            graphs and graphs with different structure.
+        </summary>
+        <author>
+            <name>KiJung Yoon</name>
+        </author>
+        <author>
+            <name>Renjie Liao</name>
+        </author>
+        <author>
+            <name>Yuwen Xiong</name>
+        </author>
+        <author>
+            <name>Lisa Zhang</name>
+        </author>
+        <author>
+            <name>Ethan Fetaya</name>
+        </author>
+        <author>
+            <name>Raquel Urtasun</name>
+        </author>
+        <author>
+            <name>Richard Zemel</name>
+        </author>
+        <author>
+            <name>Xaq Pitkow</name>
+        </author>
+        <link href="http://arxiv.org/abs/1803.07710v5" rel="alternate" type="text/html"/>
+        <link title="pdf" href="http://arxiv.org/pdf/1803.07710v5" rel="related" type="application/pdf"/>
+        <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    </entry>
+    <entry>
+        <id>http://arxiv.org/abs/1902.09948v2</id>
+        <updated>2019-06-27T14:31:46Z</updated>
+        <published>2019-02-26T14:17:59Z</published>
+        <title>Autonomous Identification and Goal-Directed Invocation of
+            Event-Predictive Behavioral Primitives</title>
+        <summary>  Voluntary behavior of humans appears to be composed of small, elementary
+            building blocks or behavioral primitives. While this modular organization seems
+            crucial for the learning of complex motor skills and the flexible adaption of
+            behavior to new circumstances, the problem of learning meaningful,
+            compositional abstractions from sensorimotor experiences remains an open
+            challenge. Here, we introduce a computational learning architecture, termed
+            surprise-based behavioral modularization into event-predictive structures
+            (SUBMODES), that explores behavior and identifies the underlying behavioral
+            units completely from scratch. The SUBMODES architecture bootstraps
+            sensorimotor exploration using a self-organizing neural controller. While
+            exploring the behavioral capabilities of its own body, the system learns
+            modular structures that predict the sensorimotor dynamics and generate the
+            associated behavior. In line with recent theories of event perception, the
+            system uses unexpected prediction error signals, i.e., surprise, to detect
+            transitions between successive behavioral primitives. We show that, when
+            applied to two robotic systems with completely different body kinematics, the
+            system manages to learn a variety of complex and realistic behavioral
+            primitives. Moreover, after initial self-exploration the system can use its
+            learned predictive models progressively more effectively for invoking model
+            predictive planning and goal-directed control in different tasks and
+            environments.
+        </summary>
+        <author>
+            <name>Christian Gumbsch</name>
+        </author>
+        <author>
+            <name>Martin V. Butz</name>
+        </author>
+        <author>
+            <name>Georg Martius</name>
+        </author>
+        <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">This work has been submitted to the IEEE for possible publication.
+            Copyright may be transferred without notice, after which this version may no
+            longer be accessible</arxiv:comment>
+        <link href="http://arxiv.org/abs/1902.09948v2" rel="alternate" type="text/html"/>
+        <link title="pdf" href="http://arxiv.org/pdf/1902.09948v2" rel="related" type="application/pdf"/>
+        <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.SY" scheme="http://arxiv.org/schemas/atom"/>
+    </entry>
+    <entry>
+        <id>http://arxiv.org/abs/1906.11667v1</id>
+        <updated>2019-06-27T14:12:52Z</updated>
+        <published>2019-06-27T14:12:52Z</published>
+        <title>Evolving Robust Neural Architectures to Defend from Adversarial Attacks</title>
+        <summary>  Deep neural networks were shown to misclassify slightly modified input
+            images. Recently, many defenses have been proposed but none have improved
+            consistently the robustness of neural networks. Here, we propose to use attacks
+            as a function evaluation to automatically search for architectures that can
+            resist such attacks. Experiments on neural architecture search algorithms from
+            the literature show that although their accurate results, they are not able to
+            find robust architectures. Most of the reason for this lies in their limited
+            search space. By creating a novel neural architecture search with options for
+            dense layers to connect with convolution layers and vice-versa as well as the
+            addition of multiplication, addition and concatenation layers in the search
+            space, we were able to evolve an architecture that is $58\%$ accurate on
+            adversarial samples. Interestingly, this inherent robustness of the evolved
+            architecture rivals state-of-the-art defenses such as adversarial training
+            while being trained only on the training dataset. Moreover, the evolved
+            architecture makes use of some peculiar traits which might be useful for
+            developing even more robust ones. Thus, the results here demonstrate that more
+            robust architectures exist as well as opens up a new range of possibilities for
+            the development and exploration of deep neural networks using automatic
+            architecture search.
+            Code available at http://bit.ly/RobustArchitectureSearch.
+        </summary>
+        <author>
+            <name>Danilo Vasconcellos Vargas</name>
+        </author>
+        <author>
+            <name>Shashank Kotyan</name>
+        </author>
+        <link href="http://arxiv.org/abs/1906.11667v1" rel="alternate" type="text/html"/>
+        <link title="pdf" href="http://arxiv.org/pdf/1906.11667v1" rel="related" type="application/pdf"/>
+        <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    </entry>
+    <entry>
+        <id>http://arxiv.org/abs/1903.01209v2</id>
+        <updated>2019-06-27T13:15:44Z</updated>
+        <published>2019-03-04T12:38:00Z</published>
+        <title>On the Long-term Impact of Algorithmic Decision Policies: Effort
+            Unfairness and Feature Segregation through Social Learning</title>
+        <summary>  Most existing notions of algorithmic fairness are one-shot: they ensure some
+            form of allocative equality at the time of decision making, but do not account
+            for the adverse impact of the algorithmic decisions today on the long-term
+            welfare and prosperity of certain segments of the population. We take a broader
+            perspective on algorithmic fairness. We propose an effort-based measure of
+            fairness and present a data-driven framework for characterizing the long-term
+            impact of algorithmic policies on reshaping the underlying population.
+            Motivated by the psychological literature on \emph{social learning} and the
+            economic literature on equality of opportunity, we propose a micro-scale model
+            of how individuals may respond to decision-making algorithms. We employ
+            existing measures of segregation from sociology and economics to quantify the
+            resulting macro-scale population-level change. Importantly, we observe that
+            different models may shift the group-conditional distribution of qualifications
+            in different directions. Our findings raise a number of important questions
+            regarding the formalization of fairness for decision-making models.
+        </summary>
+        <author>
+            <name>Hoda Heidari</name>
+        </author>
+        <author>
+            <name>Vedant Nanda</name>
+        </author>
+        <author>
+            <name>Krishna P. Gummadi</name>
+        </author>
+        <link href="http://arxiv.org/abs/1903.01209v2" rel="alternate" type="text/html"/>
+        <link title="pdf" href="http://arxiv.org/pdf/1903.01209v2" rel="related" type="application/pdf"/>
+        <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    </entry>
+    <entry>
+        <id>http://arxiv.org/abs/1905.10702v6</id>
+        <updated>2019-06-27T12:40:11Z</updated>
+        <published>2019-05-25T23:48:00Z</published>
+        <title>MDE: Multi Distance Embeddings for Link Prediction in Knowledge Graphs</title>
+        <summary>  Over the past decade, knowledge graphs became popular for capturing
+            structured domain knowledge. Relational learning models enable the prediction
+            of missing links inside knowledge graphs. More specifically, latent distance
+            approaches model the relationships among entities via a distance between latent
+            representations. Translating embedding models (e.g., TransE) are among the most
+            popular latent distance approaches which use one distance function to learn
+            multiple relation patterns. However, they are not capable of capturing
+            symmetric relations. They also force relations with reflexive patterns to
+            become symmetric and transitive. In order to improve distance based embedding,
+            we propose multi-distance embeddings (MDE). Our solution is based on the idea
+            that by learning independent embedding vectors for each entity and relation one
+            can aggregate contrasting distance functions. Benefiting from MDE, we also
+            develop supplementary distances resolving the above-mentioned limitations of
+            TransE. We further propose an extended loss function for distance based
+            embeddings and show that MDE and TransE are fully expressive using this loss
+            function. Furthermore, we obtain a bound on the size of their embeddings for
+            full expressivity. Our empirical results show that MDE significantly improves
+            the translating embeddings and outperforms several state-of-the-art embedding
+            models on benchmark datasets.
+        </summary>
+        <author>
+            <name>Afshin Sadeghi</name>
+        </author>
+        <author>
+            <name>Damien Graux</name>
+        </author>
+        <author>
+            <name>Hamed Shariat Yazdi</name>
+        </author>
+        <author>
+            <name>Jens Lehmann</name>
+        </author>
+        <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">Preprint. Under review</arxiv:comment>
+        <link href="http://arxiv.org/abs/1905.10702v6" rel="alternate" type="text/html"/>
+        <link title="pdf" href="http://arxiv.org/pdf/1905.10702v6" rel="related" type="application/pdf"/>
+        <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    </entry>
+    <entry>
+        <id>http://arxiv.org/abs/1812.03789v3</id>
+        <updated>2019-06-27T12:23:45Z</updated>
+        <published>2018-12-10T13:41:42Z</published>
+        <title>Abstracting Causal Models</title>
+        <summary>  We consider a sequence of successively more restrictive definitions of
+            abstraction for causal models, starting with a notion introduced by Rubenstein
+            et al. (2017) called exact transformation that applies to probabilistic causal
+            models, moving to a notion of uniform transformation that applies to
+            deterministic causal models and does not allow differences to be hidden by the
+            "right" choice of distribution, and then to abstraction, where the
+            interventions of interest are determined by the map from low-level states to
+            high-level states, and strong abstraction, which takes more seriously all
+            potential interventions in a model, not just the allowed interventions. We show
+            that procedures for combining micro-variables into macro-variables are
+            instances of our notion of strong abstraction, as are all the examples
+            considered by Rubenstein et al.
+        </summary>
+        <author>
+            <name>Sander Beckers</name>
+        </author>
+        <author>
+            <name>Joseph Y. Halpern</name>
+        </author>
+        <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">Appears in AAAI-19</arxiv:comment>
+        <link href="http://arxiv.org/abs/1812.03789v3" rel="alternate" type="text/html"/>
+        <link title="pdf" href="http://arxiv.org/pdf/1812.03789v3" rel="related" type="application/pdf"/>
+        <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    </entry>
+    <entry>
+        <id>http://arxiv.org/abs/1906.11583v1</id>
+        <updated>2019-06-27T12:14:57Z</updated>
+        <published>2019-06-27T12:14:57Z</published>
+        <title>Approximate Causal Abstraction</title>
+        <summary>  Scientific models describe natural phenomena at different levels of
+            abstraction. Abstract descriptions can provide the basis for interventions on
+            the system and explanation of observed phenomena at a level of granularity that
+            is coarser than the most fundamental account of the system. Beckers and Halpern
+            (2019), building on work of Rubenstein et al. (2017), developed an account of
+            abstraction for causal models that is exact. Here we extend this account to the
+            more realistic case where an abstract causal model offers only an approximation
+            of the underlying system. We show how the resulting account handles the
+            discrepancy that can arise between low- and high-level causal models of the
+            same system, and in the process provide an account of how one causal model
+            approximates another, a topic of independent interest. Finally, we extend the
+            account of approximate abstractions to probabilistic causal models, indicating
+            how and where uncertainty can enter into an approximate abstraction.
+        </summary>
+        <author>
+            <name>Sander Beckers</name>
+        </author>
+        <author>
+            <name>Frederick Eberhardt</name>
+        </author>
+        <author>
+            <name>Joseph Y. Halpern</name>
+        </author>
+        <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">Appears in UAI-2019</arxiv:comment>
+        <link href="http://arxiv.org/abs/1906.11583v1" rel="alternate" type="text/html"/>
+        <link title="pdf" href="http://arxiv.org/pdf/1906.11583v1" rel="related" type="application/pdf"/>
+        <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+        <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    </entry>
+</feed>
