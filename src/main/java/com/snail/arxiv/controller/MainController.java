@@ -2,6 +2,12 @@ package com.snail.arxiv.controller;
 
 import com.snail.arxiv.entity.PaperRecord;
 import com.snail.arxiv.mapper.PaperRecordMapper;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.dom4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,14 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.*;
 
 @Controller
 public class MainController {
-
-    @Autowired
-    String rawAtomXmlData;
 
     @Autowired
     PaperRecordMapper paperRecordMapper;
@@ -28,7 +32,128 @@ public class MainController {
     @Autowired
     Map<String, Set<String>> word2IndexDictionary;
 
-    private int maxOutputRecordsNum = 20; // 指定主页一次性最大可以输出的记录数
+    private Integer maxResults = 5000; //指定从Arxiv服务器上总共将获取多少条记录
+    private Integer stepPace = 100; //指定一次性获取多少条记录
+    private Integer maxOutputRecordsNum = 100; // 指定主页一次性最大可以输出的记录数
+    private List<String> rawAtomXmlDataList = new ArrayList<String>(); // 保存初始的xml论文记录数据
+
+    public String getSingleRawDataByHttpClient(String url) throws IOException  {
+        String rawXmlData = null;
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet httpGet = new HttpGet(url);
+        CloseableHttpResponse response = httpClient.execute(httpGet);
+        try {
+            //System.out.println(response.getStatusLine());
+            HttpEntity entity = response.getEntity();
+            rawXmlData = EntityUtils.toString(entity, "UTF-8");
+        } finally {
+            response.close();
+        }
+
+        return rawXmlData;
+    }
+
+    public void generateRawAtomXmlDataList(List<String> rawAtomXmlDataList, Integer maxResults, Integer stepPace) throws IOException {
+        // 生成初始的xml文档列表，表中的每一项代表一个原生的atom格式的xml文档
+        String url = null;
+        for (int i = 0; i<maxResults; i+=stepPace){
+            url = "http://export.arxiv.org/api/query?search_query=cat:cs.AI&sortBy=lastUpdatedDate&start=" + i + "&max_results=" + stepPace;
+            String rawXmlData = getSingleRawDataByHttpClient(url);
+            rawAtomXmlDataList.add(rawXmlData);
+        }
+
+    }
+
+    public Integer [] parseAtomXmlData(String rawAtomXmlData) throws DocumentException {
+        // 解析XML文档
+        Document document = DocumentHelper.parseText(rawAtomXmlData);
+        Element root = document.getRootElement(); // 得到根元素
+
+        // 遍历每个entry
+        int updateCount = 0;
+        int insertCount = 0;
+        Integer [] statistic = {updateCount, insertCount};
+        for (Iterator en = root.elementIterator("entry"); en.hasNext();){
+            PaperRecord record = new PaperRecord(); // 封装一条论文记录,一个entry对应一条论文记录
+            Element entry = (Element) en.next();
+            String authors = "";
+            String category = "";
+            int aucount = 1;
+            int categoryCount = 1;
+            for (Iterator it = entry.elementIterator(); it.hasNext();){
+                Element element = (Element) it.next();
+
+                if(element.getName().equals("id")){
+                    record.setId(element.getText());
+                    //System.out.println(element.getName() + ":" + element.getText());
+                }
+
+                if(element.getName().equals("published")){
+                    String stringtime = element.getText();
+                    stringtime = stringtime.replace("T", " ").replace("Z", " ").trim();
+                    Timestamp sqltime = Timestamp.valueOf(stringtime);
+                    record.setTime(sqltime);
+                    //System.out.println(element.getName() + ":" + stringtime);
+                }
+
+                if(element.getName().equals("title")){
+                    record.setTitle(element.getText());
+                    //System.out.println(element.getName() + ":" + element.getText());
+                }
+
+                if(element.getName().equals("summary")){
+                    //String summary = element.getText().replace("\n", " ");
+                    //record.setSummary(summary);
+                    record.setSummary(element.getText());
+                    //System.out.println(element.getName() + ":" + element.getText());
+                }
+
+                if(element.getName().equals("author")){
+                    for (Iterator au = element.elementIterator(); au.hasNext();){
+                        Element name = (Element) au.next();
+                        if (aucount == 1)
+                            authors = name.getText();
+                        else
+                            authors = authors + "," + name.getText();
+                    }
+                    authors = authors.trim();
+                    aucount++;
+                }
+
+                if(element.getName().equals("link") && element.attribute(0).getName().equals("title")){
+                    Attribute href = element.attribute("href");
+                    record.setLink(href.getValue());
+                    //System.out.println("link: " + href.getValue());
+                }
+
+                if(element.getName().equals("category")){
+                    Attribute term = element.attribute("term");
+                    if (categoryCount == 1)
+                        category = term.getValue();
+                    else
+                        category = category + "," + term.getValue();
+                    category = category.trim();
+                    categoryCount++;
+                }
+            }
+            record.setAuthors(authors);
+            record.setCategory(category);
+            if (paperRecordMapper.verifyRecordIsExist(record.getId())){
+                // 论文记录已存在,则更新这条记录
+                paperRecordMapper.updateOnePaperRecord(record);
+                updateCount++;
+            } else{
+                // 论文记录还未写入数据库,则插入这条记录
+                paperRecordMapper.insertOnePaperRecord(record);
+                insertCount++;
+            }
+        }
+
+        statistic[0] = updateCount;
+        statistic[1] = insertCount;
+
+        return statistic;
+    }
 
     public void generatePaperId2WordArray(Map<String, String []> paperMap){
 
@@ -161,90 +286,22 @@ public class MainController {
     }
 
     @GetMapping("/rebuild")
-    public String rebuild(Map<String, Object> map) throws DocumentException {
+    public String rebuild(Map<String, Object> map) throws IOException, DocumentException {
 
-        Document document = DocumentHelper.parseText(rawAtomXmlData);
-        Element root = document.getRootElement(); // 得到根元素
-
-        // 遍历每个entry
         int updateCount = 0;
         int insertCount = 0;
-        for (Iterator en = root.elementIterator("entry"); en.hasNext();){
-            PaperRecord record = new PaperRecord(); // 封装一条论文记录,一个entry对应一条论文记录
-            Element entry = (Element) en.next();
-            String authors = "";
-            String category = "";
-            int aucount = 1;
-            int categoryCount = 1;
-            for (Iterator it = entry.elementIterator(); it.hasNext();){
-                Element element = (Element) it.next();
 
-                if(element.getName().equals("id")){
-                    record.setId(element.getText());
-                    //System.out.println(element.getName() + ":" + element.getText());
-                }
+        // 从Arxiv获取最新的数据记录，分段获取，每个xml小文件放在一个List中
+        generateRawAtomXmlDataList(rawAtomXmlDataList, maxResults, stepPace);
 
-                if(element.getName().equals("published")){
-                    String stringtime = element.getText();
-                    stringtime = stringtime.replace("T", " ").replace("Z", " ").trim();
-                    Timestamp sqltime = Timestamp.valueOf(stringtime);
-                    record.setTime(sqltime);
-                    //System.out.println(element.getName() + ":" + stringtime);
-                }
-
-                if(element.getName().equals("title")){
-                    record.setTitle(element.getText());
-                    //System.out.println(element.getName() + ":" + element.getText());
-                }
-
-                if(element.getName().equals("summary")){
-                    //String summary = element.getText().replace("\n", " ");
-                    //record.setSummary(summary);
-                    record.setSummary(element.getText());
-                    //System.out.println(element.getName() + ":" + element.getText());
-                }
-
-                if(element.getName().equals("author")){
-                    for (Iterator au = element.elementIterator(); au.hasNext();){
-                        Element name = (Element) au.next();
-                        if (aucount == 1)
-                            authors = name.getText();
-                        else
-                            authors = authors + "," + name.getText();
-                    }
-                    authors = authors.trim();
-                    aucount++;
-                }
-
-                if(element.getName().equals("link") && element.attribute(0).getName().equals("title")){
-                    Attribute href = element.attribute("href");
-                    record.setLink(href.getValue());
-                    //System.out.println("link: " + href.getValue());
-                }
-
-                if(element.getName().equals("category")){
-                    Attribute term = element.attribute("term");
-                    if (categoryCount == 1)
-                        category = term.getValue();
-                    else
-                        category = category + "," + term.getValue();
-                    category = category.trim();
-                    categoryCount++;
-                }
-            }
-            record.setAuthors(authors);
-            record.setCategory(category);
-            if (paperRecordMapper.verifyRecordIsExist(record.getId())){
-                // 论文记录已存在,则更新这条记录
-                paperRecordMapper.updateOnePaperRecord(record);
-                updateCount++;
-            } else{
-                // 论文记录还未写入数据库,则插入这条记录
-                paperRecordMapper.insertOnePaperRecord(record);
-                insertCount++;
-            }
-            //System.out.println("authors: " + authors);
+        // 解析所有xml文档，保存到数据库
+        for (Iterator it = rawAtomXmlDataList.iterator(); it.hasNext();){
+            String rawData = (String) it.next();
+            Integer [] statistic = parseAtomXmlData(rawData);
+            updateCount += statistic[0];
+            insertCount += statistic[1];
         }
+
         map.put("rebuildMsg", "Updated " + updateCount + " records. Inserted " + insertCount + " records.");
         System.out.println("Updated " + updateCount + " records. Inserted " + insertCount + " records.");
 
